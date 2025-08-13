@@ -1,0 +1,642 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.0/css/all.min.css">
+    <title>Booking Demo — Packages</title>
+    <style>
+        :root {
+            --accent: #ffb703;
+            --danger: #e63946;
+            --bg: #0d0d0d;
+            --card-bg: rgba(255, 255, 255, 0.95);
+            --glass: rgba(255, 255, 255, 0.06);
+        }
+
+        * {
+            box-sizing: border-box
+        }
+
+        body {
+            margin: 0;
+            font-family: Inter, system-ui, Arial, sans-serif;
+            background: url('https://images.pexels.com/photos/6226725/pexels-photo-6226725.jpeg?q=80&auto=compress&cs=tinysrgb&dpr=2&h=1200') no-repeat center center fixed;
+            background-size: cover;
+            color: #111;
+            min-height: 100vh;
+            -webkit-font-smoothing: antialiased;
+            padding: 32px;
+            display: flex;
+            align-items: flex-start;
+            justify-content: center;
+        }
+
+     
+        .wrap {
+            width: 100%;
+            max-width: 1150px;
+            margin: 12px;
+            backdrop-filter: blur(6px);
+            padding: 28px;
+            border-radius: 12px;
+            background: linear-gradient(180deg, rgba(255, 255, 255, 0.03), rgba(255, 255, 255, 0.02));
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.45);
+        }
+
+        header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 16px;
+            margin-bottom: 18px;
+        }
+
+        header h1 {
+            color: #fff;
+            font-size: 20px;
+            letter-spacing: 1px;
+            margin: 0;
+        }
+
+        header p {
+            color: #ddd;
+            margin: 0;
+            font-size: 14px;
+        }
+
+        /* cards grid */
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+            gap: 18px;
+            align-items: start;
+        }
+
+        .card {
+            background: var(--card-bg);
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 8px 30px rgba(2, 2, 2, 0.3);
+            transform: translateY(0);
+            transition: transform .28s ease, box-shadow .28s ease;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.45);
+        }
+
+        .card .media {
+            width: 100%;
+            height: 160px;
+            background-size: cover;
+            background-position: center;
+            position: relative;
+        }
+
+        .card .media::after {
+            content: "";
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(180deg, rgba(0, 0, 0, 0) 40%, rgba(0, 0, 0, 0.35) 100%);
+        }
+
+        .card .body {
+            padding: 14px 14px 18px 14px;
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+            flex: 1;
+        }
+
+        .card h3 {
+            margin: 0;
+            font-size: 18px;
+            color: #111;
+        }
+
+        .price {
+            color: var(--accent);
+            font-weight: 700;
+        }
+
+        .desc {
+            color: #444;
+            font-size: 13px;
+            line-height: 1.35;
+        }
+
+        .features {
+            margin-top: 8px;
+            font-size: 13px;
+            color: #333;
+            display: grid;
+            gap: 6px;
+        }
+
+        .cta {
+            margin-top: auto;
+            display: flex;
+            gap: 8px;
+            align-items: center;
+        }
+
+        .btn {
+            background: var(--accent);
+            color: #08121b;
+            border: none;
+            padding: 9px 12px;
+            border-radius: 8px;
+            cursor: pointer;
+            font-weight: 700;
+            transition: transform .16s ease, box-shadow .16s ease;
+        }
+
+        .btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
+        }
+
+        .ghost {
+            background: transparent;
+            border: 1px solid rgba(0, 0, 0, 0.06);
+            color: #333;
+            padding: 8px 10px;
+            border-radius: 8px;
+        }
+
+        /* popup overlay */
+        .overlay {
+            position: fixed;
+            inset: 0;
+            display: none;
+            align-items: center;
+            justify-content: center;
+            background: rgba(2, 2, 2, 0.45);
+            z-index: 120;
+            padding: 20px;
+        }
+
+        .overlay.show {
+            display: flex;
+        }
+
+        .modal {
+            width: 100%;
+            max-width: 420px;
+            background: #fff;
+            border-radius: 12px;
+            padding: 16px;
+            transform: scale(.92);
+            opacity: 0;
+            transition: transform .28s cubic-bezier(.2, .9, .2, 1), opacity .28s ease;
+        }
+
+        .overlay.show .modal {
+            transform: scale(1);
+            opacity: 1;
+        }
+
+        .modal .top {
+            display: flex;
+            gap: 12px;
+            align-items: center;
+        }
+
+        .pkg-img {
+            width: 88px;
+            height: 68px;
+            border-radius: 8px;
+            background-size: cover;
+            background-position: center;
+            flex-shrink: 0;
+            box-shadow: 0 6px 18px rgba(0, 0, 0, 0.15);
+        }
+
+        .pkg-title {
+            font-weight: 700;
+            color: #111;
+            font-size: 16px;
+        }
+
+        .pkg-price {
+            color: var(--accent);
+            font-weight: 800;
+            font-size: 15px;
+        }
+
+        .fields {
+            margin-top: 12px;
+            display: grid;
+            gap: 8px;
+        }
+
+        input[type="text"],
+        input[type="email"],
+        input[type="tel"],
+        input[type="date"],
+        select {
+            width: 100%;
+            padding: 10px 12px;
+            border-radius: 8px;
+            border: 1px solid #ddd;
+            font-size: 14px;
+        }
+
+        .modal .actions {
+            margin-top: 12px;
+            display: flex;
+            gap: 10px;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .note {
+            font-size: 13px;
+            color: #666;
+        }
+
+        /* floating messages */
+        .toast {
+            position: fixed;
+            right: 18px;
+            top: 18px;
+            padding: 12px 16px;
+            border-radius: 8px;
+            color: #fff;
+            font-weight: 700;
+            z-index: 150;
+            display: none;
+            transform: translateX(14px);
+            opacity: 0;
+        }
+
+        .toast.show {
+            display: block;
+            transform: translateX(0);
+            opacity: 1;
+            transition: transform .24s ease, opacity .24s ease;
+        }
+
+        .toast.success {
+            background: #16a34a;
+        }
+
+        .toast.error {
+            background: var(--danger);
+        }
+
+        /* input error style */
+        .invalid {
+            border-color: var(--danger) !important;
+            box-shadow: 0 6px 18px rgba(230, 57, 70, 0.06);
+        }
+
+        .back-button{
+
+            position:absolute;
+            right:45%;
+            top:630px;
+
+        }
+
+        .back-button button{
+            padding:10px 40px;
+            border: none;
+            border-radius:20px;
+            background-color:#fff;
+        }
+         .back-button button:hover{
+             background-color: #ffb703;box-shadow: rgba(255, 255, 255, 0.19) 0px 10px 20px,
+    rgba(255, 255, 255, 0.23) 0px 6px 6px;
+         }
+        /* responsive smaller */
+        @media (max-width:600px) {
+            body {
+                padding: 18px;
+            }
+
+            .card .media {
+                height: 140px;
+            }
+
+            .pkg-img {
+                width: 72px;
+                height: 56px;
+            }
+
+            .modal {
+                padding: 12px;
+            }
+        }
+
+    </style>
+</head>
+
+<body>
+
+    <div class="wrap" role="main">
+        <header>
+            <div>
+                <h1 style="font-size:18px">Ronniee — Book a Package</h1>
+                <p style="margin-top:6px; color:#ddd; font-size:13px">Choose a package and confirm your date. (Demo
+                    frontend only)</p>
+            </div>
+            <div style="text-align:right">
+                <p style="color:#ddd; font-size:13px; margin:0">Advance payments handled separately</p>
+            </div>
+        </header>
+
+        <section class="grid" aria-label="packages">
+
+            <!-- Card 1: Wedding -->
+            <article class="card" data-name="Wedding Package" data-price="₹ 30,000"
+                data-img="https://images.pexels.com/photos/6079998/pexels-photo-6079998.jpeg?q=80&auto=compress&cs=tinysrgb&w=1200">
+                <div class="media"
+                    style="background-image:url('https://images.pexels.com/photos/6079998/pexels-photo-6079998.jpeg?q=80&auto=compress&cs=tinysrgb&w=1200')">
+                </div>
+                <div class="body">
+                    <h3>Wedding Package</h3>
+                    <div class="price">₹ 30,000</div>
+                    <div class="desc">Full-day wedding coverage with photographer + videographer and premium album.
+                    </div>
+                    <div class="features">
+                        <div>• 1 Photographer</div>
+                        <div>• 1 Videographer</div>
+                        <div>• Premium Photo Album</div>
+                        <div>• Drone coverage</div>
+                    </div>
+                    <div class="cta">
+                        <button class="btn" onclick="openBooking(this)">Book Now</button>
+                        <button class="ghost" onclick="viewDetails(this)">Details</button>
+                    </div>
+                </div>
+            </article>
+
+            <!-- Card 2: Pre-wedding -->
+            <article class="card" data-name="Pre-Wedding" data-price="₹ 15,000"
+                data-img="https://images.pexels.com/photos/2113566/pexels-photo-2113566.jpeg?q=80&auto=compress&cs=tinysrgb&w=1200">
+                <div class="media"
+                    style="background-image:url('https://images.pexels.com/photos/2113566/pexels-photo-2113566.jpeg?q=80&auto=compress&cs=tinysrgb&w=1200')">
+                </div>
+                <div class="body">
+                    <h3>Pre-Wedding</h3>
+                    <div class="price">₹ 15,000</div>
+                    <div class="desc">Romantic pre-wedding shoot at your favourite location — edited photos included.
+                    </div>
+                    <div class="features">
+                        <div>• 1 Photographer</div>
+                        <div>• Location shoot</div>
+                        <div>• 100 edited photos</div>
+                    </div>
+                    <div class="cta">
+                        <button class="btn" onclick="openBooking(this)">Book Now</button>
+                        <button class="ghost" onclick="viewDetails(this)">Details</button>
+                    </div>
+                </div>
+            </article>
+
+            <!-- Card 3: Birthday -->
+            <article class="card" data-name="Birthday" data-price="₹ 10,000"
+                data-img="https://images.pexels.com/photos/210647/pexels-photo-210647.jpeg?q=80&auto=compress&cs=tinysrgb&w=1200">
+                <div class="media"
+                    style="background-image:url('https://images.pexels.com/photos/210647/pexels-photo-210647.jpeg?q=80&auto=compress&cs=tinysrgb&w=1200')">
+                </div>
+                <div class="body">
+                    <h3>Birthday</h3>
+                    <div class="price">₹ 10,000</div>
+                    <div class="desc">Capture the joy — event photography with album options and quick delivery.</div>
+                    <div class="features">
+                        <div>• 1 Photographer</div>
+                        <div>• Unlimited photos</div>
+                        <div>• Quick turnaround</div>
+                    </div>
+                    <div class="cta">
+                        <button class="btn" onclick="openBooking(this)">Book Now</button>
+                        <button class="ghost" onclick="viewDetails(this)">Details</button>
+                    </div>
+                </div>
+            </article>
+
+            <!-- Card 4: Corporate -->
+            <article class="card" data-name="Corporate Event" data-price="₹ 25,000"
+                data-img="https://images.pexels.com/photos/1181690/pexels-photo-1181690.jpeg?q=80&auto=compress&cs=tinysrgb&w=1200">
+                <div class="media"
+                    style="background-image:url('https://images.pexels.com/photos/1181690/pexels-photo-1181690.jpeg?q=80&auto=compress&cs=tinysrgb&w=1200')">
+                </div>
+                <div class="body">
+                    <h3>Corporate Event</h3>
+                    <div class="price">₹ 25,000</div>
+                    <div class="desc">Professional coverage for conferences, launches, seminars with multi-camera
+                        options.</div>
+                    <div class="features">
+                        <div>• 2 Photographers</div>
+                        <div>• Videographer</div>
+                        <div>• Drone (if allowed)</div>
+                    </div>
+                    <div class="cta">
+                        <button class="btn" onclick="openBooking(this)">Book Now</button>
+                        <button class="ghost" onclick="viewDetails(this)">Details</button>
+                    </div>
+                </div>
+            </article>
+
+        </section>
+    </div>
+
+    <!-- Booking Modal -->
+    <div class="overlay" id="overlay" aria-hidden="true">
+        <div class="modal" role="dialog" aria-modal="true" aria-labelledby="modalTitle">
+            <div class="top">
+                <div class="pkg-img" id="pkgImg" style="background-image: url('')"></div>
+                <div style="flex:1;">
+                    <div class="pkg-title" id="pkgName">Package Name</div>
+                    <div class="pkg-price" id="pkgPrice">₹ 0</div>
+                </div>
+            </div>
+
+            <div class="fields">
+                <input id="fName" type="text" placeholder="Your full name">
+                <input id="fEmail" type="email" placeholder="Email (example@domain.com)">
+                <input id="fPhone" type="tel" placeholder="Phone (10 digits)">
+                <select id="fPackage">
+                    <option value="">-- Select Package --</option>
+                    <option>Wedding Package</option>
+                    <option>Pre-Wedding</option>
+                    <option>Birthday</option>
+                    <option>Corporate Event</option>
+                </select>
+                <input id="fDate" type="date">
+            </div>
+
+            <div class="actions">
+                <div style="display:flex; gap:8px;">
+                    <button class="btn" id="confirmBtn" onclick="submitBooking()">Confirm & Pay (Demo)</button>
+                    <button class="ghost" onclick="closeBooking()">Cancel</button>
+                </div>
+                <div class="note" id="note">Advance payment will be collected later (demo).</div>
+            </div>
+
+        </div>
+    </div>
+    <div class="back-button">
+        <a href="index.html"><button> <i class="fa-solid fa-backward-step"></i> Back</button></a>
+    </div>
+
+    <!-- Toast messages -->
+    <div id="toastSuccess" class="toast success">Booking successful ✔</div>
+    <div id="toastError" class="toast error">Please fix the highlighted fields</div>
+
+    
+
+    <script>
+        /* Utility helpers */
+        const $ = sel => document.querySelector(sel);
+        const $$ = sel => Array.from(document.querySelectorAll(sel));
+
+        /* Grab elements */
+        const overlay = $('#overlay');
+        const pkgImg = $('#pkgImg');
+        const pkgName = $('#pkgName');
+        const pkgPrice = $('#pkgPrice');
+        const fName = $('#fName');
+        const fEmail = $('#fEmail');
+        const fPhone = $('#fPhone');
+        const fPackage = $('#fPackage');
+        const fDate = $('#fDate');
+        const toastSuccess = $('#toastSuccess');
+        const toastError = $('#toastError');
+
+        let activePackage = null;
+
+        /* open booking popup — button's this (or event target) */
+        function openBooking(btnEl) {
+            const card = btnEl.closest('.card');
+            const name = card.dataset.name;
+            const price = card.dataset.price;
+            const img = card.dataset.img;
+
+            activePackage = { name, price, img };
+
+            // fill modal
+            pkgImg.style.backgroundImage = `url('${img}')`;
+            pkgName.textContent = name;
+            pkgPrice.textContent = price;
+            fPackage.value = name;
+
+            // reset fields and classes
+            [fName, fEmail, fPhone, fDate].forEach(i => {
+                i.value = '';
+                i.classList.remove('invalid');
+            });
+            hideToast();
+
+            overlay.classList.add('show');
+            overlay.setAttribute('aria-hidden', 'false');
+
+            // focus first
+            setTimeout(() => fName.focus(), 160);
+        }
+
+        /* close overlay */
+        function closeBooking() {
+            overlay.classList.remove('show');
+            overlay.setAttribute('aria-hidden', 'true');
+        }
+
+        /* view details simple */
+        function viewDetails(btn) {
+            const card = btn.closest('.card');
+            const name = card.dataset.name;
+            const price = card.dataset.price;
+            alert(`${name} — ${price}\n\n${card.querySelector('.desc').innerText}`);
+        }
+
+        /* toast helpers */
+        function hideToast() { [toastSuccess, toastError].forEach(t => { t.classList.remove('show'); t.style.display = 'none'; }); }
+        function showToast(el, msg) {
+            el.textContent = msg;
+            el.style.display = 'block';
+            setTimeout(() => el.classList.add('show'), 10);
+            setTimeout(() => { el.classList.remove('show'); setTimeout(() => el.style.display = 'none', 220); }, 2600);
+        }
+
+        /* validation */
+        function validateEmail(email) {
+            // simple email pattern (covers usual cases)
+            return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
+        }
+        function validatePhone(phone) {
+            return /^\d{10}$/.test(phone);
+        }
+        function isDateValid(dateStr) {
+            if (!dateStr) return false;
+            const picked = new Date(dateStr);
+            const today = new Date();
+            // set time to 0
+            picked.setHours(0, 0, 0, 0);
+            today.setHours(0, 0, 0, 0);
+            return picked >= today; // permit today and future
+        }
+
+        /* submit */
+        function submitBooking() {
+            // clear previous invalid
+            [fName, fEmail, fPhone, fDate, fPackage].forEach(i => i.classList.remove('invalid'));
+
+            const name = fName.value.trim();
+            const email = fEmail.value.trim();
+            const phone = fPhone.value.trim();
+            const pkg = fPackage.value.trim();
+            const date = fDate.value;
+
+            let ok = true;
+
+            if (!name) { ok = false; fName.classList.add('invalid'); }
+            if (!validateEmail(email)) { ok = false; fEmail.classList.add('invalid'); }
+            if (!validatePhone(phone)) { ok = false; fPhone.classList.add('invalid'); }
+            if (!pkg) { ok = false; fPackage.classList.add('invalid'); }
+            if (!isDateValid(date)) { ok = false; fDate.classList.add('invalid'); }
+
+            if (!ok) {
+                showToast(toastError, 'Fill all fields correctly');
+                return;
+            }
+
+            // Success behaviour (demo only)
+            // Build booking object (you can send this to your server)
+            const booking = {
+                name, email, phone, package: pkg, date,
+                packagePrice: activePackage ? activePackage.price : '',
+                packageImg: activePackage ? activePackage.img : ''
+            };
+
+            // log to console (replace with fetch to backend)
+            console.log('NEW BOOKING (demo):', booking);
+
+            // show success, close modal after short delay
+            showToast(toastSuccess, 'Booking confirmed! 🎉');
+            setTimeout(closeBooking, 900);
+
+            // optional: clear form
+            [fName, fEmail, fPhone, fDate].forEach(i => i.value = '');
+
+            // If you want an on-screen booking summary block, implement here
+        }
+
+        /* close on overlay click outside modal */
+        overlay.addEventListener('click', (e) => {
+            if (e.target === overlay) closeBooking();
+        });
+
+        /* keyboard escape to close */
+        window.addEventListener('keydown', (e) => { if (e.key === 'Escape') closeBooking(); });
+
+    </script>
+</body>
+
+</html>

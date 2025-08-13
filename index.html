@@ -1,0 +1,393 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://getbootstrap.com/docs/5.3/assets/css/docs.css" rel="stylesheet">
+    <title>Bootstrap Example</title>
+    <script defer src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/js/bootstrap.bundle.min.js"></script>
+    <link rel="stylesheet" href="style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.0/css/all.min.css">
+<link href="https://fonts.googleapis.com/css2?family=Josefin+Sans:ital,wght@0,100..700;1,100..700&display=swap" rel="stylesheet">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://unpkg.com/swiper/swiper-bundle.min.css" />
+<script src="https://unpkg.com/swiper/swiper-bundle.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+<link href="https://fonts.googleapis.com/css2?family=Josefin+Sans:ital,wght@0,100..700;1,100..700&family=Playwrite+HU:wght@100..400&display=swap" rel="stylesheet">
+</head>
+<body >
+    <!-- Navbar -->
+    <nav class="navbar">
+        <div class="my-logo">
+            <h1>Ronniee!</h1>
+        </div>
+        <div class="navbar-link">
+            <p><a href="#header">Home</a></p>
+            <p><a href="#services">Services</a></p>
+            <p><a href="#my-gallery">Gallery</a></p>
+            <p><a href="package.html">Package</a></p>
+            <p><a href="#footer">About</a></p>
+            <i onclick="showSidenav()" class="fa-solid fa-bars" id="openside"></i>
+        </div>
+    </nav>
+
+    <div class="side-navbar">
+    <div class="side-navbar-link">
+        <p><a href="#header">Home</a></p>
+        <p><a href="#services">Services</a></p>
+        <p><a href="#my-gallery">Gallery</a></p>
+        <p><a href="package.html">Package</a></p>
+        <p><a href="#footer">About</a></p>
+        <p class="closeside" onclick="closeSidenav()">
+            <i class="fa-solid fa-circle-up"></i>
+        </p>
+    </div>
+</div>
+
+
+    <!-- header -->
+     <div class="header-container">
+        <div class="header" id="header">
+            <div class="swiper">
+    <div class="swiper-wrapper">
+        <div class="swiper-slide" style="background-image:url('IMG_5951.JPG');">
+            <div class="slide-content">
+                <h1>Wedding Shoot</h1>
+                <a href="#">TAKE A LOOK</a>
+            </div>
+        </div>
+        <div class="swiper-slide" style="background-image:url('IMG_6022.JPG');">
+            <div class="slide-content">
+                <h1>B/W Photoshoot</h1>
+                <a href="#">TAKE A LOOK</a>
+            </div>
+        </div>
+        <div class="swiper-slide" style="background-image:url('IMG_6042.JPG');">
+            <div class="slide-content">
+                <h1>Fashion</h1>
+                <a href="#">TAKE A LOOK</a>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Navigation -->
+    <div class="swiper-button-next"></div>
+    <div class="swiper-button-prev"></div>
+</div>
+    </div>
+     </div>
+
+    <!-- <hr class="border border-2 opacity-50" style="width:100%; color: aliceblue;"> -->
+     <!-- About Me -->
+     <section class="about-content">
+    <div class="ronniee-img">
+        <img src="Screenshot_10-8-2025_155229_www.instagram.com.jpeg" alt="Ronniee">
+        <span>Ronniee</span>
+    </div>
+    <div class="about-me">
+        <h1>About Me</h1>
+        <p>
+            <span>I'm Ronniee</span> — a passionate photographer capturing life’s most genuine moments.
+            With years of experience, I specialize in weddings, portraits, and creative shoots.
+            My lens tells stories filled with emotion, color, and timeless beauty.
+        </p>
+    </div>
+</section>
+
+
+        <!-- <hr class="border border-2 opacity-50" style="width:100%; color: aliceblue;"> -->
+
+        <!-- My Service -->
+         <div class="service-container">
+          <div class="service-content">
+            <!-- <div class="service-heading">
+              <h1 class="text-center">My Service</h1>
+              <p class="text-center">Lorem ipsum, dolor sit amet consectetur adipisicing elit. Voluptates reiciendis odio id iste autem, nisi minus possimus, cumque in asperiores, eligendi sit perferendis. Ratione, doloremque et qui alias illo ipsa?</p>
+            </div>
+             -->
+  <section class="services" id="services">
+  <div class="container">
+    <h2 class="text-center">My Services</h2>
+  <hr class="border border-2 opacity-50" style="width:100%; color: aliceblue;">
+    <p class="section-subtitle">
+    My lens tells stories filled with emotion, color, and timeless beauty.
+    From candid smiles to dramatic frames, every shot reflects my artistic vision.
+    </p>
+
+    <div class="service-grid">
+      <div class="service-box">
+        <div class="icon">
+          <p><i class="fa-solid fa-camera"></i></p>
+          </div>
+        <h3>Photography</h3>
+        <p>Photography bibendum eros amet vacum the vulputate in the vitae miss.</p>
+      </div>
+
+      <div class="service-box">
+        <div class="icon">
+          <p><i class="fa-solid fa-video"></i></p>
+        </div>
+        <h3>Videography</h3>
+        <p>Videography bibendum eros amen vacun the vulputate in the vitae miss.</p>
+      </div>
+
+      <div class="service-box">
+        <div class="icon">
+          <i class="fa-solid fa-wand-magic-sparkles"></i>
+        </div>
+        <h3>Photo Retouching</h3>
+        <p>Photo Retouching bibendum eros amen vacun the vulputate in the vitae miss.</p>
+      </div>
+
+      <div class="service-box">
+        <div class="icon">
+          <i class="fa-solid fa-helicopter"></i>
+        </div>
+        <h3>Drone Shoot</h3>
+        <p>Drone Shoot bibendum eros amen vacun the vulputate in the miss.</p>
+      </div>
+
+      <div class="service-box">
+        <div class="icon">
+          <i class="fa-solid fa-highlighter"></i>
+        </div>
+        <h3>Lightning Setup</h3>
+        <p>Lightning Setup bibendum eros amen vacus duru in the vitae miss.</p>
+      </div>
+
+      <div class="service-box">
+        <div class="icon">
+          <i class="fa-solid fa-brush"></i>
+        </div>
+        <h3>Video Color Grading</h3>
+        <p>Video Color Grading bibendum amen vacus the vulputate in the vitae.</p>
+      </div>
+
+      <div class="service-box">
+        <div class="icon">
+          <i class="fa-solid fa-brush"></i>
+        </div>
+        <h3>Video Color Grading</h3>
+        <p>Video Color Grading bibendum amen vacus the vulputate in the vitae.</p>
+      </div>
+
+      <div class="service-box">
+        <div class="icon">
+          <i class="fa-solid fa-brush"></i>
+        </div>
+        <h3>Video Color Grading</h3>
+        <p>Video Color Grading bibendum amen vacus the vulputate in the vitae.</p>
+      </div>
+
+    </div>
+  </div>
+</section>
+        </div>
+        </div>
+
+        <section class="expertise">
+  <div class="expertise-container">
+    <h2 class="section-card">Expertise Area</h2>
+
+    <div class="services-cards">
+      <article class="service-card">
+        <div class="card-media" style="background-image:url('IMG_5951.JPG')"></div>
+        <div class="card-body">
+          <h3 class="card-title">
+            <span  href="#header">wed</span><span>ding</span>
+          </h3>
+        </div>
+      </article>
+
+      <article class="service-card">
+        <div class="card-media" style="background-image:url('IMG_6022.JPG')"></div>
+        <div class="card-body">
+          <h3 class="card-title">
+            <span>Black</span><span>White</span>
+          </h3>
+        </div>
+      </article>
+
+      <article class="service-card">
+        <div class="card-media" style="background-image:url('IMG_6042.JPG')"></div>
+        <div class="card-body">
+          <h3 class="card-title">
+            <span>Fas</span><span>hion</span>
+          </h3>
+        </div>
+      </article>
+    </div>
+  </div>
+</section>
+
+<!-- My gallery -->
+<div class="gallery-menu">
+<div class="my-gallery" id="my-gallery">  
+  <h2 class="text-center">Gallery</h2>
+   <hr class="border border-2 opacity-50" style="width:100%; color: aliceblue;">
+<!-- Filter Menu -->
+<div class="filter-menu">
+    <button class="active" data-filter="all">All</button>
+    <button data-filter="wedding">Wedding</button>
+    <button data-filter="event">B/w</button>
+    <button data-filter="fashion">Fashion</button>
+    <button data-filter="product">Product</button>
+</div>
+
+<!-- Masonry Gallery -->
+<div class="gallery">
+    <div class="gallery-item wedding">
+        <img src="IMG_5938.JPG" alt="">
+    </div>
+     <div class="gallery-item event">
+        <img src="IMG_6022.JPG" alt="">
+    </div>
+    <div class="gallery-item fashion">
+        <img src=" IMG_6032.JPG" alt="">
+    </div>
+    <div class="gallery-item product">
+        <img src=" IMG_6044.JPG" alt="">
+    </div>
+     <div class="gallery-item wedding">
+        <img src=" IMG_5944.JPG" alt="">
+    </div>
+    <div class="gallery-item fashion">
+        <img src=" IMG_6040.JPG" alt="">
+    </div>
+    <div class="gallery-item wedding">
+        <img src=" IMG_5941.JPG" alt="">
+    </div>
+    <div class="gallery-item event">
+        <img src=" IMG_6046.JPG" alt="">
+    </div>
+         <div class="gallery-item fashion">
+        <img src=" IMG_6043.JPG" alt="">
+    </div>
+    <div class="gallery-item wedding">
+        <img src=" IMG_5943.JPG" alt="">
+    </div>
+      <div class="gallery-item product">
+        <img src=" IMG_6033.JPG" alt="">
+    </div>
+    <div class="gallery-item wedding">
+        <img src=" IMG_5946.JPG" alt="">
+    </div>
+    <div class="gallery-item event">
+        <img src=" IMG_6026.JPG" alt="">
+    </div>
+    <div class="gallery-item product">
+        <img src=" IMG_6029.JPG" alt="">
+    </div>
+    <div class="gallery-item wedding">
+        <img src=" IMG_5950.JPG" alt="">
+    </div>
+      <div class="gallery-item event">
+        <img src=" IMG_5965.JPG" alt="">
+    </div>
+</div>
+</div>
+
+<div class="team-us">
+      <h4 class="text-center">Teammates</h4>
+     <hr class="border border-2 opacity-50" style="width:100%; color: aliceblue;">
+  <div class="testimonial-section">
+    <h2 id="testimonial-title">Camera Man !</h2>
+    <h6 class="text-center" id="testimonial-name" style="color:wheat;">Ronnie</h6>
+    <p class="testimonial-content" id="testimonial-text">
+        "From the golden glow of sunrise to the quiet charm of midnight streets, Ronnie captures moments the eye might miss. Every click of his camera freezes emotions into timeless frames !"
+    </p>
+
+    <div class="arrow left" onclick="prevSlide()">&#10094;</div>
+    <div class="arrow right" onclick="nextSlide()">&#10095;</div>
+
+    <div class="thumbnails" id="thumbnails">
+        <img src="Screenshot_10-8-2025_155229_www.instagram.com.jpeg" class="active" onclick="goToSlide(0)">
+        <img src="Screenshot_11-8-2025_195939_www.instagram.com.jpeg" onclick="goToSlide(1)">
+        <img src="Screenshot_11-8-2025_20017_www.instagram.com.jpeg" onclick="goToSlide(2)">
+    </div>
+</div>
+</div>
+
+<!-- Packagre -->ing
+ <div class="package-container">
+
+
+<div class="wrap">
+  <div>
+    <h1>Ronniee — Book a Package</h1>
+    <hr class="border border-2 opacity-50" style="width:100%; color: aliceblue;">
+    <p class="lead">Choose a package and click <strong>Book Now</strong>. (Click To Package Info<i class="fa-solid fa-down-long"></i> )</p>
+  </div>
+ </div>
+
+  <div class="package-page">
+    <button><a href="package.html">Package Info</a></button>
+  </div>
+
+
+ </div>
+
+<!-- footer -->
+
+<div class="footer-container" id="footer">
+
+  <footer>
+    <div class="newsletter">
+        <h2>Sign up to get latest update</h2>
+        <p>Sign up for our monthly newsletter for the latest news & articles</p>
+        <form id="subscribeForm">
+            <input type="email" placeholder="Enter Email Address">
+            <button type="submit">Subscribe Now</button>
+        </form>
+        <div class="success-message" id="successMessage">✅ Subscribed Successfully!</div>
+    </div>
+
+    <div class="footer-bottom">
+        <div class="footer-section">
+            <h3>RONNIEE</h3>
+            <p>Photography inila miss uman saten eliten finus vivera alacus miss the drudean seneice miss notumane tonec a fermen.</p>
+        </div>
+        <div class="footer-section">
+            <h3>Quick Links</h3>
+            <ul>
+                <li><a href="#header">Home</a></li>
+                <li><a href="#services">Services</a></li>
+                <li><a href="#my-gallery">Gallery</a></li>
+                <li><a href="package.html">Package</a></li>
+                <li><a href="#footer">About</a></li>
+            </ul>
+        </div>
+        <div class="footer-section">
+            <h3>Contact</h3>
+            <ul>
+                <li><i class="fa-solid fa-phone"></i> +91 1234567890</li>
+                <li><i class="fa-solid fa-envelope"></i> info@ronnie.com</li>
+                <li><i class="fa-solid fa-location-dot"></i> thondi new bus stand,ramanathapuram(623 409),tamil nadu.</li>
+            </ul>
+        </div>
+    </div>
+
+    <div class="footer-bottom-bar">
+    <p>Copyright © 2025 by Ronniee. All rights reserved.</p>
+    <div class="social-icons">
+        <a href="#"><i class="fab fa-facebook-f"></i></a>
+        <a href="#"><i class="fa-brands fa-x-twitter"></i></a>
+        <a href="#"><i class="fab fa-linkedin-in"></i></a>
+        <a href="#"><i class="fa-brands fa-instagram"></i></a>
+    </div>
+</div>
+
+<!-- Font Awesome Icons -->
+<script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
+
+</footer>
+
+</div>
+
+ <script src="script.js"></script>
+</body>
+</html>
